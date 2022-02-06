@@ -22,7 +22,7 @@ class ContactListActivity : ComponentActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            viewModelFactory { ContactListViewModel(UseCase.getContactsUseCase()) }
+            viewModelFactory { ContactListViewModel(UseCase.loadContactListUseCase()) }
         ).get(ContactListViewModel::class.java)
 
         setContent {
@@ -53,6 +53,6 @@ class ContactListActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
 
-        viewModel.fetchContacts()
+        viewModel.start()
     }
 }

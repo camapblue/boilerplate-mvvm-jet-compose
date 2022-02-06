@@ -4,7 +4,7 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class Contact(
+data class Contact (
     var id: String = "079 923 76 11",
     var firstName: String = "David",
     var lastName: String = "Beckham",
@@ -15,7 +15,7 @@ data class Contact(
     var birthday: Date? = null,
     var avatar: String = "https://randomuser.me/api/portraits/med/women/33.jpg",
     var nationality: String = "CH"
-) {
+): Entity {
     constructor(json: JSONObject): this() {
         this.id = json.getString("phone")
 
