@@ -17,6 +17,7 @@ open class BaseApi {
 
         val response = client.newCall(request).execute()
         val json = response.body?.string()
+        println("JSON NOW = $json")
 
         return JSONTokener(json).nextValue() as JSONObject
     }

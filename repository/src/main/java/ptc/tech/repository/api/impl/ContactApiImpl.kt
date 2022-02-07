@@ -6,7 +6,7 @@ import ptc.tech.repository.model.Contact
 
 class ContactApiImpl: BaseApi(), ContactApi {
     override fun fetchContacts(): Array<Contact> {
-        val url = "https://randomuser.me/api/?results=5"
+        val url = "https://randomuser.me/api/?results=1"
 
         val jsonObject = get(url)
         val jsonArray = jsonObject.getJSONArray("results")

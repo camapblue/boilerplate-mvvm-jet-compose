@@ -1,6 +1,7 @@
 package ptc.tech.repository.model
 
 import org.json.JSONObject
+import org.json.JSONTokener
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -46,5 +47,13 @@ data class Contact (
 
     fun fullName(): String {
         return "$firstName $lastName"
+    }
+
+    companion object {
+        fun fakeContact(id: String = "fake_id"): Contact {
+            val contact = Contact()
+            contact.id = id
+            return contact
+        }
     }
 }
