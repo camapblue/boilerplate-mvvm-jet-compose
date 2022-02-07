@@ -19,7 +19,7 @@ import ptc.tech.repository.model.Entity
 fun <Item: Entity> LoadListView(
     viewModel: LoadListViewModel<Item>,
     modifier: Modifier = Modifier,
-    itemSort: Comparator<Item>?,
+    itemSort: Comparator<Item>? = null,
     itemBuilder: @Composable() (item: Item) -> Unit
 ) = if ((viewModel.loading && !viewModel.isRefreshing) || viewModel.items == null) {
     Box(
@@ -29,9 +29,9 @@ fun <Item: Entity> LoadListView(
     }
 } else {
     Surface(Modifier.background(color = Color.Transparent)) {
-        var items = viewModel.items
+        val items = viewModel.items
         if (itemSort != null) {
-            items!!.sortWith(itemSort!!)
+            items!!.sortWith(itemSort)
         }
 
         if (items!!.isEmpty()) {

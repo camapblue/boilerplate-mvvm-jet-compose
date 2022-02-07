@@ -17,6 +17,7 @@ class ContactDetailActivity : BaseActivity<ContactDetailViewModel>() {
 
         super.onCreate(savedInstanceState)
     }
+
     override fun viewModelBuilder(): ViewModelProvider.Factory {
         return viewModelFactory {
             ContactDetailViewModel(

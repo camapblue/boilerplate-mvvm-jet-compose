@@ -17,7 +17,7 @@ class Repository {
     }
 
     // api
-    fun contactApi(): ContactApi {
+    private fun contactApi(): ContactApi {
         return ContactApiImpl()
     }
 }
