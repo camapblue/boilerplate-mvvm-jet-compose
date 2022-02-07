@@ -29,9 +29,8 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.modules.common.BaseActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="Instantiatable" />
+            android:name=".ui.modules.contact_detail.screen.ContactDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

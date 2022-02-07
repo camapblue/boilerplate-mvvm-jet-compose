@@ -13,19 +13,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.theme.Boilerplate_mvvm_jet_composeTheme
 
-open class BaseActivity<VM: ViewModel>(
-    private val screenTitle: String,
-    private val viewModelBuilder: ViewModelProvider.Factory,
-    private val screenBuilder: @Composable() (viewModel: VM) -> Unit
-) : ComponentActivity() {
-    private lateinit var viewModel: VM
+open class BaseActivity<VM: ViewModel>: ComponentActivity() {
+    lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProvider(
             this,
-            viewModelBuilder
+            viewModelBuilder()
         ).get(ViewModel::class.java) as VM
 
         setContent {
@@ -34,7 +30,7 @@ open class BaseActivity<VM: ViewModel>(
             Boilerplate_mvvm_jet_composeTheme {
                 Scaffold(topBar = {
                     TopAppBar(
-                        title = { Text(screenTitle) },
+                        title = { Text(screenTitle()) },
                         navigationIcon = {
                             IconButton(onClick = {
                                 activity?.finish()
@@ -47,9 +43,22 @@ open class BaseActivity<VM: ViewModel>(
                         }
                     )
                 }) {
-                    screenBuilder(viewModel = viewModel)
+                    buildScreen()
                 }
             }
         }
+    }
+
+    open fun viewModelBuilder(): ViewModelProvider.Factory {
+        return viewModelFactory { BaseViewModel() }
+    }
+
+    open fun screenTitle(): String {
+        return ""
+    }
+
+    @Composable
+    open fun buildScreen() {
+        Text(text = "Empty screen")
     }
 }
