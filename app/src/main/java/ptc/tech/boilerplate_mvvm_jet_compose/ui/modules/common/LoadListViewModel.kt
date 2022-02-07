@@ -15,22 +15,26 @@ open class LoadListViewModel<Item: Entity>(
     private val loadListUseCase: LoadListUseCase<Item>
 ): ViewModel() {
     var loading by mutableStateOf(false)
-
     var items by mutableStateOf<Array<Item>?>(null)
+    var isRefreshing by mutableStateOf(false)
 
     fun start() {
-        println("DO START")
         viewModelScope.launch(Dispatchers.Main) {
-            println("OK NOW")
             loading = true
             try {
-                println("START LOAD ITEMS")
                 items = withContext(Dispatchers.IO) { loadListUseCase.loadItems() }
-                println("ITEMS NOW = $items")
                 loading = false
+                if (isRefreshing) {
+                    isRefreshing = false
+                }
             } catch (exception: Exception) {
                 println("Error = $exception")
             }
         }
+    }
+
+    fun refresh() {
+        isRefreshing = true
+        start()
     }
 }

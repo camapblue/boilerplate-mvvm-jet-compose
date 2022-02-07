@@ -11,14 +11,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import ptc.tech.repository.model.Entity
 
 @Composable
 fun <Item: Entity> LoadListView(
     viewModel: LoadListViewModel<Item>,
     modifier: Modifier = Modifier,
+    itemSort: Comparator<Item>?,
     itemBuilder: @Composable() (item: Item) -> Unit
-) = if (viewModel.loading || viewModel.items == null) {
+) = if ((viewModel.loading && !viewModel.isRefreshing) || viewModel.items == null) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize() ){
@@ -27,6 +30,10 @@ fun <Item: Entity> LoadListView(
 } else {
     Surface(Modifier.background(color = Color.Transparent)) {
         var items = viewModel.items
+        if (itemSort != null) {
+            items!!.sortWith(itemSort!!)
+        }
+
         if (items!!.isEmpty()) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -35,12 +42,18 @@ fun <Item: Entity> LoadListView(
             }
         }
         else {
-            LazyColumn(
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Top
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(viewModel.isRefreshing),
+                onRefresh = { viewModel.refresh() },
             ) {
-                items(items.size) { i ->
-                    itemBuilder(items[i])
+                LazyColumn(
+                    modifier = modifier,
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Top
+                ) {
+                    items(items.size) { i ->
+                        itemBuilder(items[i])
+                    }
                 }
             }
         }
