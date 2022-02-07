@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ptc.tech.boilerplate_mvvm_jet_compose">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,6 +27,11 @@
         <activity
             android:name=".ui.modules.contact.screen.ContactListActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.modules.common.BaseActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>
