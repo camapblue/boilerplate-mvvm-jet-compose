@@ -41,6 +41,10 @@ data class Contact (
         this.nationality = json.getString("nat")
     }
 
+    override fun key(): String {
+        return id
+    }
+
     fun fullAddress(): String {
         return "${street}, ${city}, ${state}, $country"
     }

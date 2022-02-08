@@ -47,11 +47,11 @@ fun <Item: Entity> LoadListView(
                 onRefresh = { viewModel.refresh() },
             ) {
                 LazyColumn(
-                    modifier = modifier,
+                    modifier = modifier.padding(horizontal = 32.dp),
                     horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Top
+                    verticalArrangement = Arrangement.Top,
                 ) {
-                    items(items.size) { i ->
+                    items(items.size, { index -> items[index].key() }) { i ->
                         itemBuilder(items[i])
                     }
                 }
