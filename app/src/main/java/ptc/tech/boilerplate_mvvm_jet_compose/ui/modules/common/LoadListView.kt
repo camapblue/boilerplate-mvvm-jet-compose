@@ -47,7 +47,7 @@ fun <Item: Entity> LoadListView(
                 onRefresh = { viewModel.refresh() },
             ) {
                 LazyColumn(
-                    modifier = modifier.padding(horizontal = 32.dp),
+                    modifier = modifier.padding(horizontal = 16.dp),
                     horizontalAlignment = Alignment.Start,
                     verticalArrangement = Arrangement.Top,
                 ) {

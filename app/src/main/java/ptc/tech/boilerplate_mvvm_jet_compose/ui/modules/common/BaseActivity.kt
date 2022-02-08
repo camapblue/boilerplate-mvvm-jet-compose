@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -11,9 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.app_showing.GlobalLoading
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.theme.Boilerplate_mvvm_jet_composeTheme
 
-open class BaseActivity<VM: ViewModel>: ComponentActivity() {
+open class BaseActivity<VM: BaseViewModel>: ComponentActivity() {
     lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,14 @@ open class BaseActivity<VM: ViewModel>: ComponentActivity() {
                         }
                     )
                 }) {
-                    buildScreen()
+                    if (viewModel.isGlobalLoading) {
+                        Box {
+                            buildScreen()
+                            GlobalLoading()
+                        }
+                    } else {
+                        buildScreen()
+                    }
                 }
             }
         }

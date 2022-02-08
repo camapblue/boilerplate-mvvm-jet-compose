@@ -13,17 +13,22 @@ import ptc.tech.repository.model.Entity
 
 open class LoadListViewModel<Item: Entity>(
     private val loadListUseCase: LoadListUseCase<Item>
-): ViewModel() {
+): BaseViewModel() {
     var loading by mutableStateOf(false)
     var items by mutableStateOf<Array<Item>?>(null)
     var isRefreshing by mutableStateOf(false)
+    var isFirstLaunch = false
 
     fun start() {
+        if (isFirstLaunch && !isRefreshing) {
+            return
+        }
         viewModelScope.launch(Dispatchers.Main) {
             loading = true
             try {
                 items = withContext(Dispatchers.IO) { loadListUseCase.loadItems() }
                 loading = false
+                isFirstLaunch = true
                 if (isRefreshing) {
                     isRefreshing = false
                 }

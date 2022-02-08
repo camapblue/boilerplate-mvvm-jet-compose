@@ -23,13 +23,14 @@ fun ContactDetailScreen(
                 .padding(horizontal = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(24.dp))
             Text(text = contact.fullName())
             Spacer(modifier = Modifier.height(32.dp))
             Avatar(imageUrl = contact.avatar, sizeInDp = 92F)
             Spacer(modifier = Modifier.height(32.dp))
             PrimaryButton(
                 onClickListener = {
-
+                    viewModel.editContact()
                 }
             )
             Spacer(modifier = Modifier.height(32.dp))
