@@ -7,6 +7,7 @@ import ptc.tech.boilerplate_mvvm_jet_compose.app_state.AppState
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.common.BaseActivity
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.common.viewModelFactory
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.contact_detail.viewmodel.ContactDetailViewModel
+import ptc.tech.boilerplate_mvvm_jet_compose.use_case.UseCase
 import ptc.tech.repository.model.Contact
 
 class ContactDetailActivity : BaseActivity<ContactDetailViewModel>() {
@@ -22,13 +23,14 @@ class ContactDetailActivity : BaseActivity<ContactDetailViewModel>() {
         return viewModelFactory {
             ContactDetailViewModel(
                 contactId = contactId,
-                contactManager = AppState.instance.contactManager()
+                contactManager = AppState.instance.contactManager(),
+                editContactUseCase = UseCase.editContactUseCase()
             )
         }
     }
 
     override fun screenTitle(): String {
-        val contact = viewModel.getContact()
+        val contact = viewModel.contact
         if (contact is Contact) {
             return contact.fullName()
         }
@@ -38,5 +40,11 @@ class ContactDetailActivity : BaseActivity<ContactDetailViewModel>() {
     @Composable
     override fun buildScreen() {
         ContactDetailScreen(viewModel = viewModel)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.loadContact()
     }
 }

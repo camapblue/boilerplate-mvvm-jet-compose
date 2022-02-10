@@ -4,4 +4,6 @@ import ptc.tech.repository.model.Contact
 
 interface ContactRepository {
     fun fetchContacts(): Array<Contact>
+
+    fun editContact(contact: Contact): Contact
 }

@@ -12,9 +12,20 @@ class ContactManagerImpl: ContactManager {
 
     override fun getContactById(id: String): Contact? {
         if (contacts == null || contacts!!.isEmpty()) {
-            return null;
+            return null
         }
 
         return contacts!!.firstOrNull { it.id == id }
+    }
+
+    override fun updateContact(contact: Contact) {
+        if (contacts == null || contacts!!.isEmpty()) {
+            return
+        }
+        contacts!!.forEachIndexed { index, video ->
+            video.takeIf { it.id == contact.id }?.let {
+                contacts!![index] = contact
+            }
+        }
     }
 }

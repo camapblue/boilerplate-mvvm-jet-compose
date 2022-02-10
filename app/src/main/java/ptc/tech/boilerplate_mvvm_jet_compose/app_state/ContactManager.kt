@@ -6,4 +6,6 @@ interface ContactManager {
     fun updateContactList(contacts: Array<Contact>)
 
     fun getContactById(id: String): Contact?
+
+    fun updateContact(contact: Contact)
 }

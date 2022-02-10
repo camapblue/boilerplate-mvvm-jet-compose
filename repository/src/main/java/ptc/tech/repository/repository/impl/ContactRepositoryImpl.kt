@@ -11,4 +11,8 @@ class ContactRepositoryImpl(
     override fun fetchContacts(): Array<Contact> {
         return contactApi.fetchContacts()
     }
+
+    override fun editContact(contact: Contact): Contact {
+        return contact
+    }
 }
