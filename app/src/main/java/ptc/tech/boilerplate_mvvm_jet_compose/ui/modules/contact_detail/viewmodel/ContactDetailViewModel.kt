@@ -27,15 +27,14 @@ class ContactDetailViewModel(
 
     fun editContact(firstName: String, lastName: String) {
         viewModelScope.launch(Dispatchers.Main) {
+            val updatedContact = contact!!.copy(firstName = firstName, lastName = lastName)
+            contact = updatedContact
             showGlobalLoading()
             try {
-                if (contact is Contact) {
-                    val updatedContact = contact!!.copy(firstName = firstName, lastName = lastName)
-                    contact = withContext(Dispatchers.IO) { editContactUseCase.editContact(
-                        contact = updatedContact
-                    )}
-                    hideGlobalLoading()
-                }
+                contact = withContext(Dispatchers.IO) { editContactUseCase.editContact(
+                    contact = updatedContact
+                )}
+                hideGlobalLoading()
             } catch (exception: Exception) {
                 println("Error = $exception")
             }

@@ -15,4 +15,6 @@ open class BaseViewModel: ViewModel() {
     fun hideGlobalLoading() {
         isGlobalLoading = false
     }
+
+    open fun bindEvents() {}
 }

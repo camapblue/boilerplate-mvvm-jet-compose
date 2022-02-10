@@ -70,4 +70,10 @@ open class BaseActivity<VM: BaseViewModel>: ComponentActivity() {
     open fun buildScreen() {
         Text(text = "Empty screen")
     }
+
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.bindEvents()
+    }
 }

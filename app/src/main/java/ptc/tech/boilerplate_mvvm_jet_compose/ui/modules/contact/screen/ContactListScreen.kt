@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
@@ -48,7 +49,7 @@ fun ContactListScreen(
                     .padding(8.dp)
             )
             Column(modifier = Modifier.padding(8.dp)) {
-                Text("${it.fullName()}", color = Color.Black, fontSize = 15.sp)
+                Text("${it.fullName()}", color = Color.Black, fontSize = 15.sp, fontWeight = FontWeight.Bold)
                 Text(
                     "${it.fullAddress()}",
                     color = Color.Gray,

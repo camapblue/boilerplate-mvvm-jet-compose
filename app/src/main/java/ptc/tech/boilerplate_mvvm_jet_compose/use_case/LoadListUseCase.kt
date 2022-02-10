@@ -5,7 +5,7 @@ import ptc.tech.repository.model.Entity
 open class LoadListUseCase<Item: Entity> {
     fun forceToRefresh() { }
 
-    open fun loadItems(): Array<Item> {
+    open suspend fun loadItems(): Array<Item> {
         return arrayOf<Any>() as Array<Item>
     }
 }

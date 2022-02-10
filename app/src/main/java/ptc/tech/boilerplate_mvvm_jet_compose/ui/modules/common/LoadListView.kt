@@ -28,6 +28,7 @@ fun <Item: Entity> LoadListView(
         CircularProgressIndicator(modifier = Modifier.size(64.dp))
     }
 } else {
+    println("RELOAD NOW")
     Surface(Modifier.background(color = Color.Transparent)) {
         val items = viewModel.items
         if (itemSort != null) {

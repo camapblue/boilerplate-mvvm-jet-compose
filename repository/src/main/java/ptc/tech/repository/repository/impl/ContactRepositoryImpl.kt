@@ -8,11 +8,11 @@ class ContactRepositoryImpl(
     private val contactApi: ContactApi
 ): ContactRepository {
 
-    override fun fetchContacts(): Array<Contact> {
+    override suspend fun fetchContacts(): Array<Contact> {
         return contactApi.fetchContacts()
     }
 
-    override fun editContact(contact: Contact): Contact {
+    override suspend fun editContact(contact: Contact): Contact {
         return contact
     }
 }

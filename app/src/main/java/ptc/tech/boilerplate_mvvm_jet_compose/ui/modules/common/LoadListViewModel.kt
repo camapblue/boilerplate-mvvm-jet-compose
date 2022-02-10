@@ -38,6 +38,13 @@ open class LoadListViewModel<Item: Entity>(
         }
     }
 
+    fun updateItems(updatedItems: Array<Item>) {
+        if (items != null && items!!.size == updatedItems.size) {
+            items = null
+        }
+        items = updatedItems
+    }
+
     fun refresh() {
         isRefreshing = true
         start()
