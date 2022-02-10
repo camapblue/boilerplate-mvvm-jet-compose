@@ -38,9 +38,9 @@ class ContactDetailViewModel(
                 )}
                 trackEvent(Event("CONTACT_EDIT", 1))
             } catch (e: Exception) {
+                contact = original
                 showErrorMessage(e.localizedMessage)
             } finally {
-                contact = original
                 hideGlobalLoading()
             }
         }
