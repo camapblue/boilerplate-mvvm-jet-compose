@@ -14,11 +14,15 @@ class EditContactUseCaseImpl(
     private val analytics: AppAnalytics = AppAnalytics.instance
 ): EditContactUseCase {
     override suspend fun editContact(contact: Contact): Contact {
-        val updatedContact = contactRepository.editContact(contact = contact)
-        delay(2000L)
+        return try {
+            val updatedContact = contactRepository.editContact(contact = contact)
+            delay(2000L)
 
-        contactManager.updateContact(updatedContact)
-        analytics.trackEvent(Event("CONTACT_EDIT_USE_CASE",1))
-        return updatedContact
+            contactManager.updateContact(updatedContact)
+            analytics.trackEvent(Event("CONTACT_EDIT_USE_CASE", 1))
+            updatedContact
+        } catch (e: Exception) {
+            contact
+        }
     }
 }
