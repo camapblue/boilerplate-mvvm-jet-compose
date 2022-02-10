@@ -3,6 +3,7 @@ package ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.contact.screen
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModelProvider
 import ptc.tech.boilerplate_mvvm_jet_compose.app_state.AppState
+import ptc.tech.boilerplate_mvvm_jet_compose.models.Event
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.common.BaseActivity
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.common.viewModelFactory
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.contact.viewmodel.ContactListViewModel

@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import ptc.tech.boilerplate_mvvm_jet_compose.app_state.ContactManager
+import ptc.tech.boilerplate_mvvm_jet_compose.models.Event
 import ptc.tech.boilerplate_mvvm_jet_compose.ui.modules.common.BaseViewModel
 import ptc.tech.boilerplate_mvvm_jet_compose.use_case.EditContactUseCase
 import ptc.tech.repository.model.Contact
@@ -27,6 +28,7 @@ class ContactDetailViewModel(
 
     fun editContact(firstName: String, lastName: String) {
         viewModelScope.launch(Dispatchers.Main) {
+            val original = contact!!
             val updatedContact = contact!!.copy(firstName = firstName, lastName = lastName)
             contact = updatedContact
             showGlobalLoading()
@@ -34,9 +36,12 @@ class ContactDetailViewModel(
                 contact = withContext(Dispatchers.IO) { editContactUseCase.editContact(
                     contact = updatedContact
                 )}
+                trackEvent(Event("CONTACT_EDIT", 1))
+            } catch (e: Exception) {
+                showErrorMessage(e.localizedMessage)
+            } finally {
+                contact = original
                 hideGlobalLoading()
-            } catch (exception: Exception) {
-                println("Error = $exception")
             }
         }
     }

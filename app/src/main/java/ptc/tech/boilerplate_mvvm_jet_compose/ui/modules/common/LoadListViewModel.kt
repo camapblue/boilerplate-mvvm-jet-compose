@@ -33,7 +33,7 @@ open class LoadListViewModel<Item: Entity>(
                     isRefreshing = false
                 }
             } catch (exception: Exception) {
-                println("Error = $exception")
+                println("Load List Error = $exception")
             }
         }
     }
